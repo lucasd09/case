@@ -1,6 +1,6 @@
 "use client";
-import { Label } from "./label";
-import { Switch } from "./switch";
+import { Label } from "../ui/label";
+import { Switch } from "../ui/switch";
 import { useTheme } from "next-themes";
 
 export function ThemeSwitch() {

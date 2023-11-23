@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { ThemeSwitch } from "@/components/ui/theme-switch";
+import { ThemeSwitch } from "@/components/client-components/theme-switch";
 
 export default function Home() {
   return (
