@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ThemeSwitch } from "../client-components/theme-switch";
 import { Button } from "./button";
 import { Separator } from "./separator";
@@ -23,7 +24,13 @@ export default function Navbar() {
       <div className="flex h-5 items-center space-x-4 text-sm">
         <ThemeSwitch />
         <Separator orientation="vertical" />
-        <Button>Login</Button>
+        <Link href={"/login"}>
+          <Button>Login</Button>
+        </Link>
+        <p>Ou</p>
+        <Link href={"/register"}>
+          <Button variant={"secondary"}>Cadastre-se</Button>
+        </Link>
       </div>
     </div>
   );
