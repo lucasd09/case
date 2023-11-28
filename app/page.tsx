@@ -25,7 +25,9 @@ export default function Home() {
               <Button>Crie uma conta grátis</Button>
             </Link>
             <Separator orientation="vertical" className="mx-4" />
-            <Button variant={"outline"}>Conhecer o produto</Button>
+            <Link href={"/create"}>
+              <Button variant={"outline"}>Conhecer o produto</Button>
+            </Link>
           </div>
         </div>
       </div>

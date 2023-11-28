@@ -16,8 +16,8 @@ export default function Navbar() {
           <Separator orientation="vertical" />
         </li>
         <li>
-          <a href="#" className="">
-            Como funciona
+          <a href="/create" className="">
+            Criar
           </a>
         </li>
       </ul>
