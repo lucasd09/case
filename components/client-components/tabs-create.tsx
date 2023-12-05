@@ -55,7 +55,9 @@ export default function TabsCreate() {
         <Card className="w-full">
           <CardHeader className="max-w-md">
             <CardTitle>Redes Sociais</CardTitle>
-            <CardDescription>texto</CardDescription>
+            <CardDescription>
+              Adicione suas redes sociais para contato
+            </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2 max-w-md">
             <div className="space-x-1 flex items-center">
@@ -66,6 +68,45 @@ export default function TabsCreate() {
           <CardFooter>
             <Button>Salvar</Button>
           </CardFooter>
+        </Card>
+      </TabsContent>
+      <TabsContent value="portfolio">
+        <Card>
+          <CardHeader className="max-w-md">
+            <CardTitle>Seu Portfolio</CardTitle>
+            <CardDescription>
+              Adicione trabalhos anteriores, não se esqueça de deixar essa aba
+              atualizada
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2 max-w-md"></CardContent>
+          <CardFooter></CardFooter>
+        </Card>
+      </TabsContent>
+      <TabsContent value="links">
+        <Card>
+          <CardHeader className="max-w-md">
+            <CardTitle>Links Adicionais</CardTitle>
+            <CardDescription>
+              Adicione aqui sites, ou qualquer link que possa ser de interesse
+              seu
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2 max-w-md"></CardContent>
+          <CardFooter></CardFooter>
+        </Card>
+      </TabsContent>
+      <TabsContent value="customization">
+        <Card>
+          <CardHeader className="max-w-md">
+            <CardTitle>Customização do Link</CardTitle>
+            <CardDescription>
+              Selecione uma URL personalizada, caso ela esteja disponível, ela
+              será sua!
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-2 max-w-md"></CardContent>
+          <CardFooter></CardFooter>
         </Card>
       </TabsContent>
     </Tabs>
