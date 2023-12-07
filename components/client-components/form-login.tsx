@@ -1,5 +1,4 @@
 "use client";
-import axiosClient from "@/app/services/axiosClient";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -14,7 +13,8 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import useAuthStore from "@/app/stores/authStore";
+import { useRouter } from "next/navigation";
+import { signInRequest } from "@/app/services/axiosRequests";
 
 const schema = z.object({
   email: z.string().email(),
@@ -23,19 +23,18 @@ const schema = z.object({
 
 type formLogin = z.infer<typeof schema>;
 
-async function handleLogin(data: formLogin) {
-  const res = await axiosClient.post("/login", data);
-
-  if (res.status === 200) {
-    const token = res.data.access_token;
-    useAuthStore.getState().setAccessToken(token);
-
-    //console.log(useAuthStore.getState().accessToken);
-  }
-}
-
 export default function FormLogin() {
   const { register, handleSubmit } = useForm<formLogin>({});
+  const router = useRouter();
+
+  async function handleLogin({ email, password }: formLogin) {
+    const res = await signInRequest({ email, password });
+
+    if (res) {
+      router.push("/create");
+    }
+  }
+
   return (
     <form onSubmit={handleSubmit(handleLogin)}>
       <Card className="m-16">

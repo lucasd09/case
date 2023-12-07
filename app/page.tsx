@@ -1,4 +1,3 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/ui/navbar";
 import { Separator } from "@/components/ui/separator";
