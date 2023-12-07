@@ -27,11 +27,7 @@ type formLogin = z.infer<typeof schema>;
 export default function FormLogin() {
   const [login, setLogin] = useState<boolean>(true);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<formLogin>({});
+  const { register, handleSubmit } = useForm<formLogin>({});
   const router = useRouter();
 
   async function handleLogin({ email, password }: formLogin) {
@@ -52,7 +48,9 @@ export default function FormLogin() {
         </CardHeader>
         <CardContent className="space-y-2 max-w-md text-left">
           <div className="space-y-1">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className={!login ? "text-red-500" : ""}>
+              Email
+            </Label>
             <Input id="email" {...register("email")} />
             {!login && (
               <span className="text-red-500 text-xs">
@@ -61,7 +59,9 @@ export default function FormLogin() {
             )}
           </div>
           <div className="space-y-1">
-            <Label htmlFor="password">Senha</Label>
+            <Label htmlFor="password" className={!login ? "text-red-500" : ""}>
+              Senha
+            </Label>
             <Input id="password" {...register("password")} type="password" />
             {!login && (
               <span className="text-red-500 text-xs">
