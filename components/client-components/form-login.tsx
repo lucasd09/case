@@ -15,6 +15,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { signInRequest } from "@/app/services/axiosRequests";
+import { useState } from "react";
 
 const schema = z.object({
   email: z.string().email(),
@@ -24,7 +25,13 @@ const schema = z.object({
 type formLogin = z.infer<typeof schema>;
 
 export default function FormLogin() {
-  const { register, handleSubmit } = useForm<formLogin>({});
+  const [login, setLogin] = useState<boolean>(true);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<formLogin>({});
   const router = useRouter();
 
   async function handleLogin({ email, password }: formLogin) {
@@ -33,6 +40,7 @@ export default function FormLogin() {
     if (res) {
       router.push("/create");
     }
+    setLogin(false);
   }
 
   return (
@@ -46,10 +54,20 @@ export default function FormLogin() {
           <div className="space-y-1">
             <Label htmlFor="email">Email</Label>
             <Input id="email" {...register("email")} />
+            {!login && (
+              <span className="text-red-500 text-xs">
+                Email ou senha inválidos
+              </span>
+            )}
           </div>
           <div className="space-y-1">
             <Label htmlFor="password">Senha</Label>
             <Input id="password" {...register("password")} type="password" />
+            {!login && (
+              <span className="text-red-500 text-xs">
+                Email ou senha inválidos
+              </span>
+            )}
           </div>
         </CardContent>
         <CardFooter className="flex flex-col ">
