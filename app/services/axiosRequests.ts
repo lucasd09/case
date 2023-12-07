@@ -22,7 +22,7 @@ export async function signUpRequest({ email, password }: SignInProps) {
     const res = await axiosClient.post("/users", { email, password });
 
     if (res.status === 201) {
-      return true;
+      return await signInRequest({ email, password });
     }
   } catch {
     return false;

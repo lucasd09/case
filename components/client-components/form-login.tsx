@@ -39,8 +39,9 @@ export default function FormLogin() {
 
     if (res) {
       router.push("/create");
+    } else {
+      setLogin(false);
     }
-    setLogin(false);
   }
 
   return (
