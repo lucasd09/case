@@ -28,3 +28,17 @@ export async function signUpRequest({ email, password }: SignInProps) {
     return false;
   }
 }
+
+export async function getCaseRequest(
+  id: number
+): Promise<CaseProps | undefined> {
+  try {
+    const res = await axiosClient.get(`/cases/${id}`);
+
+    if (res.status === 200) {
+      return res.data;
+    }
+  } catch {
+    return undefined;
+  }
+}
