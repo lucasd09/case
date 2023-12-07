@@ -27,7 +27,11 @@ type formLogin = z.infer<typeof schema>;
 export default function FormLogin() {
   const [login, setLogin] = useState<boolean>(true);
 
-  const { register, handleSubmit } = useForm<formLogin>({});
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<formLogin>({});
   const router = useRouter();
 
   async function handleLogin({ email, password }: formLogin) {

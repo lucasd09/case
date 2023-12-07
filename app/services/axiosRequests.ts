@@ -16,3 +16,15 @@ export async function signInRequest({ email, password }: SignInProps) {
     return false;
   }
 }
+
+export async function signUpRequest({ email, password }: SignInProps) {
+  try {
+    const res = await axiosClient.post("/users", { email, password });
+
+    if (res.status === 201) {
+      return true;
+    }
+  } catch {
+    return false;
+  }
+}
