@@ -11,7 +11,8 @@ import {
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { Textarea } from "../ui/textarea";
+import { TabsGeneral } from "./tabs-general";
+import { TabsPortfolio } from "./tabs-portfolio";
 
 export default function TabsCreate() {
   return (
@@ -24,32 +25,7 @@ export default function TabsCreate() {
         <TabsTrigger value="customization">Customização do link</TabsTrigger>
       </TabsList>
       <TabsContent value="general">
-        <Card>
-          <CardHeader className="max-w-md">
-            <CardTitle>Dados gerais</CardTitle>
-            <CardDescription>
-              Faça alterações em seus dados para que eles estejam sempre
-              atualizados. Não se esqueça de salvar após as alterações.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2 max-w-md">
-            <div className="space-y-1">
-              <Label htmlFor="name">Nome</Label>
-              <Input id="name" placeholder="Lucas Dalan" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="title">Título</Label>
-              <Input id="title" placeholder="Software Developer" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="bio">Bio</Label>
-              <Textarea placeholder="Escreva um pouco sobre você." />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button>Salvar</Button>
-          </CardFooter>
-        </Card>
+        <TabsGeneral />
       </TabsContent>
       <TabsContent value="socialmedia">
         <Card className="w-full">
@@ -71,17 +47,7 @@ export default function TabsCreate() {
         </Card>
       </TabsContent>
       <TabsContent value="portfolio">
-        <Card>
-          <CardHeader className="max-w-md">
-            <CardTitle>Seu Portfolio</CardTitle>
-            <CardDescription>
-              Adicione trabalhos anteriores, não se esqueça de deixar essa aba
-              atualizada
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2 max-w-md"></CardContent>
-          <CardFooter></CardFooter>
-        </Card>
+        <TabsPortfolio />
       </TabsContent>
       <TabsContent value="links">
         <Card>

@@ -1,6 +1,7 @@
 type CaseProps = {
   name: string;
   bio: string;
-  portfolio: PortofolioProps[];
-  userId: number;
+  title: string;
+  portfolio?: PortofolioProps[];
+  userId?: number;
 };

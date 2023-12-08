@@ -1,13 +1,28 @@
 "use client";
-import { getCaseRequest } from "@/app/services/axiosRequests";
-import { useEffect } from "react";
+import { createCase, getCase, updateCase } from "@/app/services/axiosRequests";
+import { Button } from "../ui/button";
 
 export function CaseCreate() {
-  async function fetchCase(id: number) {
-    const caseUser = await getCaseRequest(id);
+  async function fetchCase() {
+    const caseUser = await getCase();
+
+    if (!caseUser?.userId) {
+      createCase();
+    }
+
+    console.log(caseUser);
     return caseUser;
   }
 
-  useEffect(() => {});
-  return <div></div>;
+  return (
+    <div>
+      <Button
+        onClick={() => {
+          fetchCase();
+        }}
+      >
+        pegar case
+      </Button>
+    </div>
+  );
 }

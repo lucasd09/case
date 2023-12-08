@@ -14,7 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
-import { signInRequest } from "@/app/services/axiosRequests";
+import { signIn } from "@/app/services/axiosRequests";
 import { useState } from "react";
 
 const schema = z.object({
@@ -35,7 +35,7 @@ export default function FormLogin() {
   const router = useRouter();
 
   async function handleLogin({ email, password }: formLogin) {
-    const res = await signInRequest({ email, password });
+    const res = await signIn({ email, password });
 
     if (res) {
       router.push("/create");
