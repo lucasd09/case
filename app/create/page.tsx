@@ -1,5 +1,6 @@
 import TabsCreate from "@/components/client-components/tabs-create";
 import { CaseCreate } from "@/components/client-components/case-create";
+import { PortfolioDialog } from "@/components/client-components/dialogs/portfolio-dialog";
 
 export default function Create() {
   return (

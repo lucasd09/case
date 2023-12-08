@@ -1,5 +1,5 @@
 "use client";
-import { createCase, getCase, updateCase } from "@/app/services/axiosRequests";
+import { createCase, getCase } from "@/app/services/axiosRequests";
 import { Button } from "../ui/button";
 
 export function CaseCreate() {
@@ -11,6 +11,7 @@ export function CaseCreate() {
     }
 
     console.log(caseUser);
+
     return caseUser;
   }
 

@@ -1,6 +1,4 @@
 "use client";
-import { useState } from "react";
-import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
@@ -9,12 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { PortfolioDialog } from "./dialogs/portfolio-dialog";
 
 export function TabsPortfolio() {
-  const [dialog, setDialog] = useState(false);
-
   return (
     <Card>
       <CardHeader className="max-w-md">
@@ -24,17 +19,9 @@ export function TabsPortfolio() {
           atualizada
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-2 max-w-md">
-        {dialog && <div>alo</div>}
-      </CardContent>
-      <CardFooter>
-        <Button
-          onClick={() => {
-            setDialog(true);
-          }}
-        >
-          Adicionar
-        </Button>
+      <CardContent className="space-y-2 max-w-md"></CardContent>
+      <CardFooter className="flex justify-end ">
+        <PortfolioDialog />
       </CardFooter>
     </Card>
   );

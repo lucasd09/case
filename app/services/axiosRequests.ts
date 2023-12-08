@@ -83,3 +83,15 @@ export async function addPortfolio({
   image,
   link,
 }: PortofolioProps) {}
+
+export async function getPortfolios(): Promise<PortofolioProps[] | undefined> {
+  try {
+    const user = jwtDecode(token);
+    const res = await axiosClient.get(`/portfolios`, {
+      data: { where: { id: user.sub } },
+    });
+
+    console.log(res.data);
+    return res.data;
+  } catch {}
+}
