@@ -1,4 +1,5 @@
 type CaseProps = {
+  id?: number;
   name: string;
   bio: string;
   title: string;

@@ -34,17 +34,19 @@ export function TabsGeneral() {
   async function handleForm({ name, title, bio }: generalForm) {
     const updatedData = await updateCase({ name, title, bio });
   }
+  const fetchProfileData = async () => {
+    try {
+      const currentProfile = await getCase();
+      setProfile(currentProfile ?? undefined);
+    } catch (error) {
+      console.error("Erro ao buscar profile:", error);
+    }
+  };
+
+  // UseEffect para buscar os dados ao montar o componente
   useEffect(() => {
-    const fetchCase = async () => {
-      try {
-        const profile = await getCase();
-        setProfile(profile ?? undefined);
-      } catch (error) {
-        console.error("Erro ao buscar profile:", error);
-      }
-    };
-    fetchCase();
-  });
+    fetchProfileData();
+  }, []);
   return (
     <form onSubmit={handleSubmit(handleForm)}>
       <Card>

@@ -38,6 +38,7 @@ export default function FormLogin() {
     const res = await signIn({ email, password });
 
     if (res) {
+      router.refresh;
       router.push("/create");
     } else {
       setLogin(false);

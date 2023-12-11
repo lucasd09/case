@@ -1,4 +1,5 @@
 "use client";
+import { addPortfolio, getCase } from "@/app/services/axiosRequests";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -19,7 +20,7 @@ import { z } from "zod";
 const schema = z.object({
   title: z.string(),
   description: z.string(),
-  image: z.any(),
+  image: z.string(),
   link: z.string(),
 });
 
@@ -33,8 +34,30 @@ export function PortfolioDialog() {
     },
   });
 
-  async function handleForm(data: formPortfolio) {
-    console.log(data);
+  async function handleForm({
+    description,
+    image,
+    link,
+    title,
+  }: formPortfolio) {
+    try {
+      const caseUser = await getCase();
+      const caseId = caseUser?.id;
+
+      if (caseId) {
+        const portfolio = await addPortfolio({
+          caseId,
+          description,
+          image,
+          link,
+          title,
+        });
+
+        return portfolio;
+      }
+    } catch {
+      console.log("deu erro");
+    }
   }
 
   return (
@@ -82,6 +105,8 @@ export function PortfolioDialog() {
                     className="col-span-3"
                     type="file"
                     {...field}
+                    value={field.value ?? ""}
+                    accept="image/"
                   />
                 )}
               />

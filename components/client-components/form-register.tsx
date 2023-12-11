@@ -14,7 +14,7 @@ import { Separator } from "@/components/ui/separator";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signUp, signIn } from "@/app/services/axiosRequests";
+import { signUp, signIn, createCase } from "@/app/services/axiosRequests";
 import { useRouter } from "next/navigation";
 
 const schema = z
@@ -43,7 +43,9 @@ export default function FormRegister() {
     try {
       const register = await signUp({ email, password });
       const login = await signIn({ email, password });
+      await createCase();
 
+      router.refresh;
       router.push("/create");
     } catch {
       throw new Error("erro");
