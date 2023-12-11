@@ -14,7 +14,8 @@ import { Label } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { updateCase } from "@/app/services/axiosRequests";
+import { getCase, updateCase } from "@/app/services/axiosRequests";
+import { useState, useEffect } from "react";
 
 const generalSchema = z.object({
   name: z.string(),
@@ -25,15 +26,25 @@ const generalSchema = z.object({
 type generalForm = z.infer<typeof generalSchema>;
 
 export function TabsGeneral() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<generalForm>({ resolver: zodResolver(generalSchema) });
+  const [profile, setProfile] = useState<CaseProps>();
+  const { register, handleSubmit } = useForm<generalForm>({
+    resolver: zodResolver(generalSchema),
+  });
 
   async function handleForm({ name, title, bio }: generalForm) {
     const updatedData = await updateCase({ name, title, bio });
   }
+  useEffect(() => {
+    const fetchCase = async () => {
+      try {
+        const profile = await getCase();
+        setProfile(profile ?? undefined);
+      } catch (error) {
+        console.error("Erro ao buscar profile:", error);
+      }
+    };
+    fetchCase();
+  });
   return (
     <form onSubmit={handleSubmit(handleForm)}>
       <Card>
@@ -47,17 +58,26 @@ export function TabsGeneral() {
         <CardContent className="space-y-2 max-w-md">
           <div className="space-y-1">
             <Label htmlFor="name">Nome</Label>
-            <Input id="name" {...register("name")} />
+            <Input
+              id="name"
+              {...register("name")}
+              defaultValue={profile?.name}
+            />
           </div>
           <div className="space-y-1">
             <Label htmlFor="title">Título</Label>
-            <Input id="title" {...register("title")} />
+            <Input
+              id="title"
+              {...register("title")}
+              defaultValue={profile?.title}
+            />
           </div>
           <div className="space-y-1">
             <Label htmlFor="bio">Bio</Label>
             <Textarea
               placeholder="Escreva um pouco sobre você."
               {...register("bio")}
+              defaultValue={profile?.bio}
             />
           </div>
         </CardContent>

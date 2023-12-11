@@ -11,7 +11,6 @@ export function CaseCreate() {
     }
 
     console.log(caseUser);
-
     return caseUser;
   }
 

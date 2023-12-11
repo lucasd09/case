@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,21 +13,24 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 
 const schema = z.object({
-  title: z.string().min(5),
+  title: z.string(),
   description: z.string(),
-  image: z.string(),
+  image: z.any(),
   link: z.string(),
 });
 
 type formPortfolio = z.infer<typeof schema>;
 
 export function PortfolioDialog() {
-  const { register, handleSubmit } = useForm<formPortfolio>({
+  const { register, handleSubmit, control } = useForm<formPortfolio>({
     resolver: zodResolver(schema),
+    defaultValues: {
+      image: undefined,
+    },
   });
 
   async function handleForm(data: formPortfolio) {
@@ -34,14 +38,14 @@ export function PortfolioDialog() {
   }
 
   return (
-    <form onSubmit={handleSubmit(handleForm)}>
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="secondary">
-            <Plus />
-          </Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="default">
+          <Plus />
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[425px]">
+        <form onSubmit={handleSubmit(handleForm)}>
           <DialogHeader>
             <DialogTitle>Portfolio</DialogTitle>
             <DialogDescription>
@@ -69,11 +73,17 @@ export function PortfolioDialog() {
               <Label htmlFor="image" className="text-right">
                 Foto de capa
               </Label>
-              <Input
-                id="image"
-                className="col-span-3"
-                type="file"
-                {...register("image")}
+              <Controller
+                name="image"
+                control={control}
+                render={({ field }) => (
+                  <Input
+                    id="image"
+                    className="col-span-3"
+                    type="file"
+                    {...field}
+                  />
+                )}
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
@@ -84,10 +94,10 @@ export function PortfolioDialog() {
             </div>
           </div>
           <DialogFooter>
-            <Button>Salvar</Button>
+            <Button type="submit">Salvar</Button>
           </DialogFooter>
-        </DialogContent>
-      </Dialog>
-    </form>
+        </form>
+      </DialogContent>
+    </Dialog>
   );
 }

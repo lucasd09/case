@@ -91,7 +91,6 @@ export async function getPortfolios(): Promise<PortofolioProps[] | undefined> {
       data: { where: { id: user.sub } },
     });
 
-    console.log(res.data);
     return res.data;
   } catch {}
 }
